@@ -1,77 +1,77 @@
 from django.db import models
 
 
-class fundingAccount(models.Model):
+class FundingAccount(models.Model):
     source = models.CharField(max_length=100)
     restricted = models.BooleanField()
-    total_amount = models.FloatField()
-    allocated_amount = models.FloatField()
-    remaining_balance = models.FloatField()
+    totalAmount = models.FloatField()
+    allocatedAmount = models.FloatField()
+    remainingBalance = models.FloatField()
     restrictions = models.CharField(max_length=500)
     notes = models.CharField(max_length=500)
         
     def __str__(self):
         return f"{self.source}-{self.notes[:50]}" 
 
-class grant(models.Model):
+class Grant(models.Model):
     name = models.CharField(max_length=100)
     grantor = models.CharField(max_length=100)
-    grant_amount = models.FloatField()
+    grantAmount = models.FloatField()
     allocated = models.FloatField()
     remaining = models.FloatField()
     restrictions = models.CharField(max_length=100)
-    due_date = models.DateField()
+    dueDate = models.DateField()
     notes = models.CharField(max_length=500)
         
     def __str__(self):
         return f"{self.name}-{self.notes[:50]}" 
     
 
-class donor(models.Model):
-    donor_name = models.CharField(max_length=100)
-    donation_date = models.DateField()
-    total_amount = models.FloatField()
-    allocated_amount = models.FloatField()
-    remaining_balance = models.FloatField()
+class Donor(models.Model):
+    donorName = models.CharField(max_length=100)
+    donationDate = models.DateField()
+    totalAmount = models.FloatField()
+    allocatedAmount = models.FloatField()
+    remainingBalance = models.FloatField()
     
-    reciept_issued = models.DateField()
-    followup_date = models.DateField()
+    receiptIssued = models.DateField()
+    followupDate = models.DateField()
 
-    form_required = models.BooleanField()
+    formRequired = models.BooleanField()
     
-    acknowledgment_letter_sent = models.BooleanField()
+    acknowledgmentLetterSent = models.BooleanField()
     
     notes = models.CharField(max_length=500) 
         
     def __str__(self):
-        return f"{self.donor_name}-{self.notes[:50]}" 
+        return f"{self.donorName}-{self.notes[:50]}" 
     
     
-class budget(models.Model):
-    program_name = models.CharField(max_length=100)
-    budgeted_amount = models.FloatField()
-    actual_spent = models.FloatField()
-    remaining_balance = models.FloatField()
+class Budget(models.Model):
+    programName = models.CharField(max_length=100)
+    budgetedAmount = models.FloatField()
+    actualSpent = models.FloatField()
+    remainingBalance = models.FloatField()
     notes = models.CharField(max_length=500)
         
     def __str__(self):
-        return f"{self.program_name}-{self.notes[:50]}" 
+        return f"{self.programName}-{self.notes[:50]}" 
 
     
-class incomeStatement(models.Model):
-    revenue_source = models.CharField(max_length=100)
-    unrestricted_funds = models.FloatField()
-    restricted_funds = models.FloatField()
+class IncomeStatement(models.Model):
+    revenueSource = models.CharField(max_length=100)
+    unrestrictedFunds = models.FloatField()
+    restrictedFunds = models.FloatField()
     total = models.FloatField()
         
     def __str__(self):
-        return f"{self.revenue_source}" 
+        return f"{self.revenueSource}" 
     
-class irsFilling(models.Model):
-    filling_type = models.CharField(max_length=100)
-    due_date = models.DateField()
+class IrsFilling(models.Model):
+    fillingType = models.CharField(max_length=100)
+    dueDate = models.DateField()
     status = models.CharField(max_length=100)
     notes = models.CharField(max_length=100)
         
     def __str__(self):
-        return f"{self.filling_type}-{self.notes[:50]}" 
+        return f"{self.fillingType}-{self.notes[:50]}" 
