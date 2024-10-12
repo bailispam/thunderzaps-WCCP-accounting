@@ -1,7 +1,9 @@
 import { useState } from "react";
 
+import { Home } from "./Home";
+
 const style = {
-    home: {
+    main: {
         width: "100vw",
         height: "100vh",
         margin: 0,
@@ -10,14 +12,14 @@ const style = {
 };
 
 export const App = () => {
-    const [tab, setTab] = useState();
+    const [tab, setTab] = useState("home");
 
     return (
-        <div style={style.home}>
+        <div style={style.main}>
             <div>
                 <p> Select Tab </p>
             </div>
-            <div></div>
+            <div>{tab === "home" && <Home />}</div>
         </div>
     );
 };
