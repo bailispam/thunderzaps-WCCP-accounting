@@ -22,4 +22,7 @@ from . import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('hello/', views.hello_view, name='hello'),  # Handle GET request
+    path('submit/', views.submit_view, name='submit'),  # Handle POST request
+    path('fund/', views.funds, name='funds'),  # Handle POST request
+    path('add_fund/', views.add_funds, name='add_funds'),  # Handle POST request
 ]
