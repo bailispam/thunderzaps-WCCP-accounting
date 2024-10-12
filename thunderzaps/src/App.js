@@ -7,7 +7,35 @@ const style = {
         width: "100vw",
         height: "100vh",
         margin: 0,
-        backgroundColor: "#a0ffa0",
+
+        display: "flex",
+        flexDirection: "row",
+    },
+
+    sidebar: {
+        width: "20vw",
+        height: "100vh",
+        margin: 0,
+        backgroundColor: "#60a060",
+
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        paddingTop: "1em",
+        paddingBottom: "1em",
+        gap: "50px",
+    },
+
+    content: {
+        width: "80vw",
+        height: "100vh",
+    },
+
+    tabButton: {
+        width: "100%",
+        border: "none",
+        backgroundColor: "#b0f0b0",
+        padding: "20px",
     },
 };
 
@@ -16,10 +44,11 @@ export const App = () => {
 
     return (
         <div style={style.main}>
-            <div>
+            <div style={style.sidebar}>
                 <p> Select Tab </p>
+                <button style={style.tabButton}> Home </button>
             </div>
-            <div>{tab === "home" && <Home />}</div>
+            <div style={style.content}>{tab === "home" && <Home />}</div>
         </div>
     );
 };
