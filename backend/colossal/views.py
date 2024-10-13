@@ -20,15 +20,18 @@ def home(request):
     return HttpResponse("Welcome to the Colossal API")
 
 def budget(request):
-    if request.method == "GET":
+    if request.method == "GET": # to show the budget part of the data base
         response = JsonResponse(list(Budget.objects.values()), safe=False)
-    elif request.method == "PUT":
+    elif request.method == "PUT": # to add to the budget part of the data base
         program_name = request.PUT.get('programName')
         budgeted_amount = float(request.PUT.get('budgetedAmount', 0))  # Default to 0 if not provided
         actual_spent = float(request.PUT.get('actualSpent', 0))  # Default to 0 if not provided
-        remaining_balance = float(request.PUT.get('remainingBalance', 0))  # Default to 0 if not provided
+        remaining_balance = 0 # Default to 0
         notes = request.PUT.get('notes', '')
-
+        if budgeted_amount > actual_spent:
+            remaining_balance = budgeted_amount - actual_spent 
+        else:
+            print("ERROR: actual spent is larger than budgeted amount")
         # Create a new Budget instance
         new_budget = Budget(
             programName=program_name,
@@ -46,6 +49,7 @@ def budget(request):
     response["Access-Control-Allow-Origin"] = "*"
     return response
 
+# rest of the functions are like the top one but for other pt. of the sheet
 
 def donor(request):
     if request.method == "GET":
