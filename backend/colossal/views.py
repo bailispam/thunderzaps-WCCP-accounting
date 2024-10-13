@@ -5,37 +5,48 @@ from django.http import HttpResponse, JsonResponse
 # Create your views here.
 def budget(request):
 	if request.method == "GET":
-		return JsonResponse(list(Budget.objects.values()), safe=False)
+		response = JsonResponse(list(Budget.objects.values()), safe=False)
 	else:
-		return HttpResponse("Invalid request method")
+		response = HttpResponse("Invalid request method")
+	response["Access-Control-Allow-Origin"] = "*"
+	return response
 
 def donor(request):
 	if request.method == "GET":
-		return JsonResponse(list(Donor.objects.values()), safe=False)
+		response = JsonResponse(list(Donor.objects.values()), safe=False)
 	else:
-		return HttpResponse("Invalid request method")
+		response = HttpResponse("Invalid request method")
+	response["Access-Control-Allow-Origin"] = "*"
+	return response
 
 def funding(request):
 	if request.method == "GET":
-		return JsonResponse(list(Funding.objects.values()), safe=False)
+		response = JsonResponse(list(Funding.objects.values()), safe=False)
 	else:
-		return HttpResponse("Invalid request method")
-	
-	
+		response = HttpResponse("Invalid request method")
+	response["Access-Control-Allow-Origin"] = "*"
+	return response
+
 def grant(request):
 	if request.method == "GET":
-		return JsonResponse(list(Grant.objects.values()), safe=False)
+		response = JsonResponse(list(Grant.objects.values()), safe=False)
 	else:
-		return HttpResponse("Invalid request method")
+		response = HttpResponse("Invalid request method")
+	response["Access-Control-Allow-Origin"] = "*"
+	return response
 
 def incomeStatement(request):
 	if request.method == "GET":
-		return JsonResponse(list(IncomeStatement.objects.values()), safe=False)
+		response = JsonResponse(list(IncomeStatement.objects.values()), safe=False)
 	else:
-		return HttpResponse("Invalid request method")
+		response = HttpResponse("Invalid request method")
+	response["Access-Control-Allow-Origin"] = "*"
+	return response
 
 def irsFilling(request):
 	if request.method == "GET":
-		return JsonResponse(list(IrsFilling.objects.values()), safe=False)
+		response = JsonResponse(list(IrsFilling.objects.values()), safe=False)
 	else:
-		return HttpResponse("Invalid request method")
+		response = HttpResponse("Invalid request method")
+	response["Access-Control-Allow-Origin"] = "*"
+	return response
