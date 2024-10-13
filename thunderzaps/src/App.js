@@ -114,8 +114,8 @@ export const App = () => {
                 <Tab label="Grants" value={2} {...a11yProps(2)} />
                 <Tab label="Donors" value={3} {...a11yProps(3)} />
                 <Tab label="Budget" value={4} {...a11yProps(4)} />
-                <Tab label="Income" value={6} {...a11yProps(6)} />
-                <Tab label="Tax Filings" value={7} {...a11yProps(7)} />
+                <Tab label="Income" value={5} {...a11yProps(6)} />
+                <Tab label="Tax Filings" value={6} {...a11yProps(7)} />
             </Tabs>
             <TabPanel value={tab} index={0}>
                 <Home />
@@ -132,10 +132,10 @@ export const App = () => {
             <TabPanel value={tab} index={4}>
                 <Budgeting />
             </TabPanel>
-            <TabPanel value={tab} index={6}>
+            <TabPanel value={tab} index={5}>
                 <IncomeStatement />
             </TabPanel>
-            <TabPanel value={tab} index={7}>
+            <TabPanel value={tab} index={6}>
                 <IRSFilings />
             </TabPanel>
         </div>

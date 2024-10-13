@@ -5,16 +5,16 @@ import axios from "axios";
 
 export const GrantForm = () => {
 	const [formData, setFormData] = useState({
-		name: '',
-		grantor: '',
-		grantAmount: '',
-		allocated: '',
-		remaining: '',
-		restrictions: '',
+		name: 'A',
+		grantor: '23',
+		grantAmount: '500',
+		allocated: '5',
+		remaining: '495',
+		restrictions: 'None',
 		dueDate: '',
-		notes: '',
+		notes: 'None',
 	});
-
+	
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData({
@@ -30,9 +30,11 @@ export const GrantForm = () => {
 	
 		axios({
 			url: "http://129.146.245.100/grant/",
-			method: "POST",
+			method: "PUT",
 			data: formData,
-		}).catch((err) => {});
+		}).catch((err) => {
+			console.log(err)
+		});
 	};
 
 	return (
