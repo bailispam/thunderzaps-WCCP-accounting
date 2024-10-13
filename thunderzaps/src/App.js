@@ -59,7 +59,7 @@ export const App = () => {
     };
     
     const forms = [ 
-        ["Grant", <GrantForm />],
+        ["Grant", <GrantForm setForm={setForm} />],
         ["Donanation", <DonorForm />],
         ["Budgetting", <BudgetForm />],
     ]
@@ -67,7 +67,7 @@ export const App = () => {
     const showForms = (query) => {
         return forms.filter(([name, _]) => name.toLowerCase().includes(query.toLowerCase())).map(([text, data]) => [text, data]);
     }
-
+    
     return (
         <div style={style.main}>
             {

@@ -1,7 +1,11 @@
 import { Button, Container, TextField, Typography, Box } from '@mui/material';
 import React, { useState } from 'react';
 
-export const DonorForm = () => {
+import axios from "axios";
+
+export const DonorForm = (props) => {
+	const {setForm} = props;
+
 	const [formData, setFormData] = useState({
 		donorName: '',
 		donationDate: '',
@@ -27,6 +31,17 @@ export const DonorForm = () => {
 		e.preventDefault();
 		// Handle form submission logic here
 		console.log(formData);
+
+		setForm([]);
+		window.location.reload();
+		
+		axios({
+			url: "http://129.146.245.100/donor/",
+			method: "PUT",
+			data: formData,
+		}).catch((err) => {
+			console.log(err)
+		});
 	};
 
 	return (

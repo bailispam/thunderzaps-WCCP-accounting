@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 
 import axios from "axios";
 
-export const GrantForm = () => {
+export const GrantForm = (props) => {
+	const {setForm} = props;
+
 	const [formData, setFormData] = useState({
 		name: 'A',
 		grantor: '23',
@@ -28,6 +30,9 @@ export const GrantForm = () => {
 		e.preventDefault();
 		// Handle form submission logic here
 		console.log(formData);
+
+		setForm([]);
+		window.location.reload();
 		
 		axios({
 			url: "http://129.146.245.100/grant/",

@@ -1,7 +1,11 @@
 import { Button, Container, TextField, Typography, Box } from '@mui/material';
 import React, { useState } from 'react';
 
-export const BudgetForm = () => {
+import axios from "axios";
+
+export const BudgetForm = (props) => {
+	const {setForm} = props;
+
 	const [formData, setFormData] = useState({
 		programName: '',
 		budgetedAmount: '',
@@ -22,6 +26,17 @@ export const BudgetForm = () => {
 		e.preventDefault();
 		// Handle form submission logic here
 		console.log(formData);
+
+		setForm([]);
+		window.location.reload();
+		
+		axios({
+			url: "http://129.146.245.100/budget/",
+			method: "PUT",
+			data: formData,
+		}).catch((err) => {
+			console.log(err)
+		});
 	};
 
 	return (
