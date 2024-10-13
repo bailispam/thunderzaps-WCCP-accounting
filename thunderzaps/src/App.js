@@ -94,7 +94,7 @@ export const App = () => {
                         <Box display='flex' justifyContent='flex-end'>
                             <Button onClick={() => setForm([])}>X</Button>
                         </Box>
-                        {form}
+                        {form[1]}
                     </Paper>
                 </Box>
             </Modal>
