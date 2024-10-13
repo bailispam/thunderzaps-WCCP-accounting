@@ -18,7 +18,7 @@ export const Grants = () => {
             })
             
             .catch((err) => {});
-    }, []);
+    }, []); 
         
     const columns = [
     { field: 'name', headerName: 'Grant Name', width: 200 },

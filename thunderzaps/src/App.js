@@ -55,6 +55,7 @@ export const App = () => {
     const [tab, setTab] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [query, setQuery] = useState("");
+    const [form, setForm] = useState([]);
     
     const handleChange = (event, newValue) => {
         setTab(newValue);
@@ -69,7 +70,7 @@ export const App = () => {
     ]
 
     const showForms = (query) => {
-        return forms.filter(([name, _]) => name.toLowerCase().includes(query.toLowerCase())).map(([text, component]) => [text, component]);
+        return forms.filter(([name, _]) => name.toLowerCase().includes(query.toLowerCase())).map(([text, data]) => [text, data]);
     }
 
     return (
@@ -81,13 +82,25 @@ export const App = () => {
                         <Box display='flex' justifyContent='flex-end'>
                             <Button onClick={() => setShowModal(false)}>X</Button>
                         </Box>
-                        <Input height='3vh' placeholder="New..." fullWidth onChange={e => setQuery(e.target.value)} />
-                        <Box flexGrow={1} />
-                        <Box height='22vh' display='flex' flexDirection='column'overflow='scroll' gap="20px" > 
-                            {showForms(query).map((data, i) => <Button key={i} svariant="contained" onClick={() => setShowModal(false)}>{data[0]}</Button>)}
+                        <Input placeholder="New..." fullWidth onChange={e => setQuery(e.target.value)} />
+                        <Box height='2vh' />
+                        <Box flexGrow={1} display='flex' flexDirection='column'overflow='scroll' gap="20px" > 
+                            {showForms(query).map((data, i) => <Button key={i} svariant="contained" onClick={() => {setShowModal(false); setForm(data)}}>{data[0]}</Button>)}
                         </Box>
                     </Paper>
                 </Box> 
+            </Modal>
+            }
+            {
+            <Modal open={form.length !== 0}>
+                <Box width='100vw' height='100vh' display='flex' justifyContent='center' alignItems='center'>
+                    <Paper sx={{padding: '2em', height: '80vh', width: '50vw', gap: '2em', display: 'flex', flexDirection: 'column'}}>
+                        <Box display='flex' justifyContent='flex-end'>
+                            <Button onClick={() => setForm([])}>X</Button>
+                        </Box>
+                        {form}
+                    </Paper>
+                </Box>
             </Modal>
             }
             <Tabs
