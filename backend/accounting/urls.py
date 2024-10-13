@@ -18,6 +18,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from colossal import views
+
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("budget/", views.budget),
+    path("donor/", views.donor),
+    path("funding/", views.funding),
+    path("incomestatement/", views.incomeStatement),
+    path("irsfilling/", views.irsFilling),
 ]
