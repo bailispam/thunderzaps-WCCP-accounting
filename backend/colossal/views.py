@@ -35,6 +35,7 @@ def budget(request):
     response["Access-Control-Allow-Origin"] = "*"
     return response
 
+# rest of the functions are like the top one but for other pt. of the sheet
 
 def donor(request):
     if request.method == "GET":
@@ -220,95 +221,7 @@ def irsFilling(request):
         # Save the new instance to the database
         new_irs_filing.save()
         return JsonResponse({"message": "IRS filing added successfully"}, status=201)  # 201 Created
-    else:
-        response = HttpResponse("Invalid request method")
-    response["Access-Control-Allow-Origin"] = "*"
-    return response
-'''
-# views.py
-
-import csv
-from django.http import HttpResponse
-from django.shortcuts import render
-from .forms import CSVUploadForm  # Make sure to import your form
-from .models import Funding, Grant, Donor, Budget, IncomeStatement, IrsFilling  # Import your models
-
-def getCSV(request):
-    if request.method == 'POST':
-        form = CSVUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            # Get the uploaded file
-            csv_file = request.FILES['csv_file']
-            # Read the uploaded CSV file
-            decoded_file = csv_file.read().decode('utf-8').splitlines()
-            reader = csv.reader(decoded_file)
-
-            # Process the CSV data here
-            for row in reader:
-                # Process the CSV data
-                type = form.cleaned_data['type']  # Get the type from the form
-                if type == "BUDGET":
-                    budget = Budget(
-                        programName=row[0],
-                        budgetedAmount=float(row[1]),  # Assuming the second column is a float
-                        actualSpent=float(row[2]),      # Assuming the third column is a float
-                        remainingBalance=float(row[3]),  # Assuming the fourth column is a float
-                        notes=row[4]
-                    )
-                    budget.save()
-                elif type == "DONOR":
-                    donor = Donor(
-                        donorName=row[0],
-                        donationDate=row[1],  # Assuming the second column is a date
-                        totalAmount=float(row[2]),  # Assuming the third column is a float
-                        allocatedAmount=float(row[3]),
-                        remainingBalance=float(row[4]),
-                        receiptIssued=row[5],
-                        followupDate=row[6],
-                        formRequired=row[7].lower() == 'true',  # Assuming a string 'True'/'False'
-                        acknowledgmentLetterSent=row[8].lower() == 'true',
-                        notes=row[9]
-                    )
-                    donor.save()
-                elif type == "FUNDING":
-                    funding = Funding(
-                        source=row[0],
-                        restricted=row[1].lower() == 'true',
-                        totalAmount=float(row[2]),
-                        allocatedAmount=float(row[3]),
-                        remainingBalance=float(row[4]),
-                        restrictions=row[5],
-                        notes=row[6]
-                    )
-                    funding.save()
-                elif type == "GRANT":
-                    grant = Grant(
-                        name=row[0],
-                        grantor=row[1],
-                        grantAmount=float(row[2]),
-                        allocated=float(row[3]),
-                        remaining=float(row[4]),
-                        restrictions=row[5],
-                        dueDate=row[6],  # Assuming the due date is in the correct format
-                        notes=row[7]
-                    )
-                    grant.save()
-                elif type == "INCOME":
-                    income_statement = IncomeStatement(
-                        revenueSource=row[0],
-                        unrestrictedFunds=float(row[1]),
-                        restrictedFunds=float(row[2]),
-                        total=float(row[3])
-                    )
-                    income_statement.save()
-                elif type == "IRS":
-                    irs = IrsFilling(
-                        fillingType=row[0],
-                        dueDate=row[1],  # Assuming the due date is in the correct format
-                        status=row[2],
-                        notes=row[3]
-                    )
-                    irs.save()
-            return HttpResponse('CSV file processed successfully')
-    return render(request, 'upload_csv.html', {'form': form})
-'''
+	else:
+		response = HttpResponse("Invalid request method")
+	response["Access-Control-Allow-Origin"] = "*"
+	return response

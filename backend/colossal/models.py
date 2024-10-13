@@ -1,6 +1,7 @@
 from django.db import models
 
 class Funding(models.Model):
+    # to represent the Fund Accounting sheet and its columns 
     source = models.CharField(max_length=100)
     restricted = models.BooleanField()
     totalAmount = models.FloatField()
@@ -13,6 +14,7 @@ class Funding(models.Model):
         return f"{self.source}-{self.notes[:50]}" 
 
 class Grant(models.Model):
+    # to represent the Grant Tracking sheet and its columns 
     name = models.CharField(max_length=100)
     grantor = models.CharField(max_length=100)
     grantAmount = models.FloatField()
@@ -27,6 +29,7 @@ class Grant(models.Model):
     
 
 class Donor(models.Model):
+    # to represent the Donor Management sheet and its columns
     donorName = models.CharField(max_length=100)
     donationDate = models.DateField()
     totalAmount = models.FloatField()
@@ -47,6 +50,7 @@ class Donor(models.Model):
     
     
 class Budget(models.Model):
+    # to represent the Budgeting sheet and its columns
     programName = models.CharField(max_length=100)
     budgetedAmount = models.FloatField()
     actualSpent = models.FloatField()
@@ -58,6 +62,8 @@ class Budget(models.Model):
 
     
 class IncomeStatement(models.Model):
+    # to represent the Income Statement (Statement of Activities) sheet and its
+    # columns
     revenueSource = models.CharField(max_length=100)
     unrestrictedFunds = models.FloatField()
     restrictedFunds = models.FloatField()
@@ -66,8 +72,9 @@ class IncomeStatement(models.Model):
     def __str__(self):
         return f"{self.revenueSource}" 
     
-class IrsFiling(models.Model):
-    filingType = models.CharField(max_length=100)
+class IrsFilling(models.Model):
+    # to represent the IRS Filings sheet and its columns
+    fillingType = models.CharField(max_length=100)
     dueDate = models.DateField()
     status = models.CharField(max_length=100, default="")
     notes = models.CharField(max_length=100, default="")
