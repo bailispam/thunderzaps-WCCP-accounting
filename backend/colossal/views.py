@@ -93,7 +93,6 @@ def funding(request):
         response = JsonResponse(list(Funding.objects.values()), safe=False)
     elif request.method == "PUT":
         data = json.loads(request.body)
-        data = json.loads(request.body)
         source = data.get('source')
         restricted = data.get('restricted') == 'true'  # Assuming it's coming as a string
         total_amount = float(data.get('totalAmount', 0))  # Default to 0 if not provided
@@ -102,7 +101,7 @@ def funding(request):
         restrictions = data.get('restrictions', '')
         notes = data.get('notes', '')
         funding_date_str = data.get('fundingDate')  # Get the date as string
-
+        
         # Convert string to date object
         try:
             funding_date = datetime.strptime(funding_date_str, "%m-%d-%Y").date() if funding_date_str else None
@@ -134,22 +133,30 @@ def grant(request):
         response = JsonResponse(list(Grant.objects.values()), safe=False)
     elif request.method == "PUT":
         data = json.loads(request.body)
-        source = data.get('source')
-        restricted = data.get('restricted') == 'true'  # Convert to boolean
-        total_amount = float(data.get('totalAmount', 0))  # Default to 0 if not provided
-        allocated_amount = float(data.get('allocatedAmount', 0))
-        remaining_balance = float(data.get('remainingBalance', 0))
+        name = data.get('name')
+        grantor = data.get('grantor')
+        grant_amount = float(data.get('grantAmount', 0))  # Default to 0 if not provided
+        allocated = float(data.get('allocated', 0))
+        remaining = float(data.get('remaining', 0))
         restrictions = data.get('restrictions', '')
         notes = data.get('notes', '')
+        due_date_str = data.get('dueDate')  # Get the due date as string
+        
+        # Convert string to date object
+        try:
+            due_date = datetime.strptime(due_date_str, "%m-%d-%Y").date() if due_date_str else None
+        except ValueError:
+            return JsonResponse({"error": "Invalid date format. Use MM-DD-YYYY."}, status=400)
 
         # Create a new Funding instance
         new_funding = Grant(
-            source=source,
-            restricted=restricted,  # Set the restricted value
-            totalAmount=total_amount,
-            allocatedAmount=allocated_amount,
-            remainingBalance=remaining_balance,
+            name=name,
+            grantor=grantor,
+            grantAmount=grant_amount,
+            allocated=allocated,
+            remaining=remaining,
             restrictions=restrictions,
+            dueDate=due_date,  # Set the due date
             notes=notes
         )
 
@@ -166,14 +173,10 @@ def incomeStatement(request):
         response = JsonResponse(list(IncomeStatement.objects.values()), safe=False)
     elif request.method == "PUT":
         data = json.loads(request.body)
-        name = data.get('name')
-        grantor = data.get('grantor')
-        grant_amount = float(data.get('grantAmount', 0))  # Default to 0 if not provided
-        allocated = float(data.get('allocated', 0))
-        remaining = float(data.get('remaining', 0))
-        restrictions = data.get('restrictions', '')
-        notes = data.get('notes', '')
-        due_date_str = data.get('dueDate')  # Get the due date as string
+        source = data.get('source')
+        restricted_amount = float(data.get('restrictedAmount', 0))  # Default to 0 if not provided
+        unrestricted_amount = float(data.get('unrestrictedAmount', 0))  # Default to 0 if not provided
+        total_amount = float(data.get('totalAmount', 0))  # Default to 0 if not provided
 
         # Convert string to date object
         try:
@@ -182,19 +185,15 @@ def incomeStatement(request):
             return JsonResponse({"error": "Invalid date format. Use MM-DD-YYYY."}, status=400)
 
         # Create a new Grant instance
-        new_grant = IncomeStatement(
-            name=name,
-            grantor=grantor,
-            grantAmount=grant_amount,
-            allocated=allocated,
-            remaining=remaining,
-            restrictions=restrictions,
-            dueDate=due_date,  # Set the due date
-            notes=notes
+        new_statement = IncomeStatement(
+            revenueSource=source,
+            restrictedFunds=restricted_amount,
+            unrestrictedFunds=unrestricted_amount,
+            total=total_amount
         )
 
         # Save the new instance to the database
-        new_grant.save()
+        new_statement.save()
         return JsonResponse({"message": "Grant added successfully"}, status=201)  # 201 Created
     else:
         response = HttpResponse("Invalid request method")
@@ -205,7 +204,6 @@ def irsFilling(request):
     if request.method == "GET":
         response = JsonResponse(list(IrsFilling.objects.values()), safe=False)
     if request.method == "PUT":
-        data = json.loads(request.body)
         data = json.loads(request.body)
         filling_type = data.get('fillingType')
         due_date_str = data.get('dueDate')  # Expecting a string date (e.g., '2024-10-13')
