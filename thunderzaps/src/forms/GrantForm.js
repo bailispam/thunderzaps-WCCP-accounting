@@ -33,7 +33,7 @@ export const GrantForm = () => {
 				Grant Form
 			</Typography>
 			<form onSubmit={handleSubmit}>
-				<Box display="flex" flexDirection='column' justifyContent="space-between" gap="10px">
+				<Box display="flex" flexDirection='column' justifyContent="space-between" gap="8px">
 					<TextField
 						fullWidth
 						label="Grant Name"
@@ -104,7 +104,7 @@ export const GrantForm = () => {
 						value={formData.notes}
 						onChange={handleChange}
 						multiline
-						rows={4}
+						rows={2}
 						required
 					/>
 					<Button type="submit" variant="contained" color="primary">

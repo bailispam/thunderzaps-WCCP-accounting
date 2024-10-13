@@ -107,7 +107,7 @@ export const App = () => {
                 sx={{ borderRight: 1, borderColor: "divider", width: '20vw' }}
             >
                 <Box height={50} />
-                <Typography variant="h4" align="center">ThunderZaps</Typography>
+                <Typography variant="h4" align="center">Colossal</Typography>
                 <Box height={50} />
                 <Button endIcon={<AddIcon />} onClick={() => setShowModal(x => !x)}> New </Button>
                 <Box height={25} />
