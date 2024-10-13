@@ -11,6 +11,8 @@ import { Box, Button, Input, Modal, Paper, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 
 import { GrantForm } from "./forms/GrantForm";
+import { BudgetForm } from "./forms/BudgetForm";
+import { DonorForm } from "./forms/DonorForm";
 
 function a11yProps(index) {
     return {
@@ -59,10 +61,8 @@ export const App = () => {
     
     const forms = [ 
         ["Grant", <GrantForm />],
-        ["Donanation", <GrantForm />],
-        ["Tax Filing", <GrantForm />],
-        ["Invoice", <GrantForm />],
-        ["Expense", <GrantForm />],
+        ["Donanation", <DonorForm />],
+        ["Budgetting", <BudgetForm />],
     ]
 
     const showForms = (query) => {
