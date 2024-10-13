@@ -22,6 +22,7 @@ from colossal import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("grant/", views.grant),
     path("budget/", views.budget),
     path("donor/", views.donor),
     path("funding/", views.funding),
