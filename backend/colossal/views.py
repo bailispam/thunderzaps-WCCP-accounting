@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from time import timezone
 from django.shortcuts import render
 from .models import Budget, Donor, Funding, Grant, IncomeStatement, IrsFilling
@@ -55,15 +55,15 @@ def donor(request):
         acknowledgment_letter_sent = data.get('acknowledgmentLetterSent') == 'true'  # Convert to boolean
         notes = data.get('notes', '')  # Default to empty string if not provided
         try:
-            donation_date = datetime.strptime(donation_date_str, "%m-%d-%Y").date() if donation_date_str else None
+            donation_date = datetime.strptime(donation_date_str, "%Y-%m-%d").date() if donation_date_str else None
         except ValueError:
             return JsonResponse({"error": "Invalid date format. Use MM-DD-YYYY."}, status=400)
         try:
-            receipt_issued = datetime.strptime(receipt_issued_str, "%m-%d-%Y").date() if receipt_issued_str else None
+            receipt_issued = datetime.strptime(receipt_issued_str, "%Y-%m-%d").date() if receipt_issued_str else None
         except ValueError:
             return JsonResponse({"error": "Invalid date format. Use MM-DD-YYYY."}, status=400)
         try:
-            followup_date = datetime.strptime(followup_date_str, "%m-%d-%Y").date() if followup_date_str else None
+            followup_date = datetime.strptime(followup_date_str, "%Y-%m-%d").date() if followup_date_str else None
         except ValueError:
             return JsonResponse({"error": "Invalid date format. Use MM-DD-YYYY."}, status=400)
         # Create a new Donor instance
@@ -104,7 +104,7 @@ def funding(request):
         
         # Convert string to date object
         try:
-            funding_date = datetime.strptime(funding_date_str, "%m-%d-%Y").date() if funding_date_str else None
+            funding_date = datetime.strptime(funding_date_str, "%Y-%m-%d").date() if funding_date_str else None
         except ValueError:
             return JsonResponse({"error": "Invalid date format. Use MM-DD-YYYY."}, status=400)
 
@@ -144,7 +144,7 @@ def grant(request):
         
         # Convert string to date object
         try:
-            due_date = datetime.strptime(due_date_str, "%m-%d-%Y").date() if due_date_str else None
+            due_date = datetime.strptime(due_date_str, "%Y-%m-%d").date() if due_date_str else None
         except ValueError:
             return JsonResponse({"error": "Invalid date format. Use MM-DD-YYYY."}, status=400)
 
@@ -159,7 +159,7 @@ def grant(request):
             dueDate=due_date,  # Set the due date
             notes=notes
         )
-
+        
         # Save the new instance to the database
         new_funding.save()
         return JsonResponse({"message": "Funding added successfully"}, status=201)  # 201 Created
@@ -177,13 +177,7 @@ def incomeStatement(request):
         restricted_amount = float(data.get('restrictedAmount', 0))  # Default to 0 if not provided
         unrestricted_amount = float(data.get('unrestrictedAmount', 0))  # Default to 0 if not provided
         total_amount = float(data.get('totalAmount', 0))  # Default to 0 if not provided
-
-        # Convert string to date object
-        try:
-            due_date = datetime.strptime(due_date_str, "%m-%d-%Y").date() if due_date_str else None
-        except ValueError:
-            return JsonResponse({"error": "Invalid date format. Use MM-DD-YYYY."}, status=400)
-
+        
         # Create a new Grant instance
         new_statement = IncomeStatement(
             revenueSource=source,
@@ -212,7 +206,7 @@ def irsFilling(request):
 
         # Convert the due date string to a date object
         try:
-            due_date = timezone.datetime.strptime(due_date_str, '%m-%d-%Y').date()
+            due_date = timezone.datetime.strptime(due_date_str, '%Y-%m-%d').date()
         except ValueError:
             return JsonResponse({"error": "Invalid date format. Please use MM-DD-YYYY."}, status=400)
 
