@@ -1,6 +1,6 @@
 import { Button, Container, TextField, Typography, Box } from '@mui/material';
 import React, { useState } from 'react';
-   
+
 import axios from "axios";
 
 export const GrantForm = () => {
@@ -11,12 +11,13 @@ export const GrantForm = () => {
 		allocated: '5',
 		remaining: '495',
 		restrictions: 'None',
-		dueDate: '',
+		dueDate: '0',
 		notes: 'None',
 	});
-	
+
 	const handleChange = (e) => {
-		const { name, value } = e.target;
+		let { name, value } = e.target;
+
 		setFormData({
 			...formData,
 			[name]: value,
@@ -27,7 +28,7 @@ export const GrantForm = () => {
 		e.preventDefault();
 		// Handle form submission logic here
 		console.log(formData);
-	
+		
 		axios({
 			url: "http://129.146.245.100/grant/",
 			method: "PUT",
