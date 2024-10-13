@@ -6,7 +6,11 @@ import Tab from "@mui/material/Tab";
 import { Home } from "./pages/Home";
 import { Grants } from "./pages/Grants";
 import { Funds } from "./pages/Funds";
-import { Donors } from "./pages/Donors";
+import { Budgeting } from "./pages/Budeting";
+import { Balance } from "./pages/Balance";
+import { Income, IncomeStatement } from "./pages/Income";
+import { IRSFilings } from "./pages/IRSFilings";
+
 import { Box, Button, Input, Modal, Paper, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 
@@ -117,6 +121,10 @@ export const App = () => {
                 <Tab label="Item Three" value={2} {...a11yProps(2)} />
                 <Tab label="Item Four" value={3} {...a11yProps(3)} />
                 <Tab label="Item Five" value={4} {...a11yProps(4)} />
+                <Tab label="Item Three" value={2} {...a11yProps(5)} />
+                <Tab label="Item Four" value={3} {...a11yProps(6)} />
+                <Tab label="Item Five" value={4} {...a11yProps(7)} />
+                <Tab label="Item Five" value={4} {...a11yProps(8)} />
             </Tabs>
             <TabPanel value={tab} index={0}>
                 <Home />
@@ -131,7 +139,16 @@ export const App = () => {
                 <Donors />
             </TabPanel>
             <TabPanel value={tab} index={4}>
-                Item Five
+                <Budgeting />
+            </TabPanel>
+            <TabPanel value={tab} index={4}>
+                <Balance />
+            </TabPanel>
+            <TabPanel value={tab} index={4}>
+                <IncomeStatement />
+            </TabPanel>
+            <TabPanel value={tab} index={4}>
+                <IRSFilings />
             </TabPanel>
         </div>
     );
