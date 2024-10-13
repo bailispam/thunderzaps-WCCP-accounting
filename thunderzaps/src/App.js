@@ -17,7 +17,9 @@ import AddIcon from '@mui/icons-material/Add';
 
 import { GrantForm } from "./forms/GrantForm";
 import { BudgetForm } from "./forms/BudgetForm";
+import { FundForm } from "./forms/FundForm";
 import { DonorForm } from "./forms/DonorForm";
+import { TaxForm } from "./forms/TaxForm";
 
 
 // separated to be able to import universally, sharin is carin'
@@ -60,10 +62,12 @@ export const App = () => {
     
     const forms = [ 
         ["Grant", <GrantForm setForm={setForm} />],
-        ["Donanation", <DonorForm />],
-        ["Budgetting", <BudgetForm />],
+        ["Donanation", <DonorForm  setForm={setForm} />],
+        ["Budget", <BudgetForm  setForm={setForm} />],
+        ["Fund", <FundForm  setForm={setForm} />],
+        ["Tax Form", <TaxForm  setForm={setForm} />],
     ]
-
+    
     const showForms = (query) => {
         return forms.filter(([name, _]) => name.toLowerCase().includes(query.toLowerCase())).map(([text, data]) => [text, data]);
     }

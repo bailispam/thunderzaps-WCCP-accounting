@@ -1,19 +1,21 @@
 import { Button, Container, TextField, Typography, Box } from '@mui/material';
 import React, { useState } from 'react';
-
 import axios from "axios";
 
-export const GrantForm = (props) => {
+/*
+	{ field: 'filingType', headerName: 'Filing Type', width: 200 },
+	{ field: 'dueDate', headerName: 'Due Date', width: 150 },
+	{ field: 'status', headerName: 'Status', width: 150 },
+	{ field: 'notes', headerName: 'TNotes', width: 200 },
+*/
+
+export const TaxForm = (props) => {
 	const {setForm} = props;
 
 	const [formData, setFormData] = useState({
-		name: '',
-		grantor: '',
-		grantAmount: '',
-		allocated: '',
-		remaining: '',
-		restrictions: '',
+		filingType: '',
 		dueDate: '',
+		status: '',
 		notes: '',
 	});
 
@@ -35,7 +37,7 @@ export const GrantForm = (props) => {
 		window.location.reload();
 		
 		axios({
-			url: "http://129.146.245.100/grant/",
+			url: "http://129.146.245.100/irsfilling/",
 			method: "PUT",
 			data: formData,
 		}).catch((err) => {
@@ -46,58 +48,15 @@ export const GrantForm = (props) => {
 	return (
 		<Container maxWidth="sm">
 			<Typography variant="h4" gutterBottom>
-				Grant Form
+				Tax Form
 			</Typography>
 			<form onSubmit={handleSubmit}>
 				<Box display="flex" flexDirection='column' justifyContent="space-between" gap="8px">
 					<TextField
 						fullWidth
-						label="Grant Name"
-						name="name"
-						value={formData.name}
-						onChange={handleChange}
-						required
-					/>
-					<TextField
-						fullWidth
-						label="Grantor"
-						name="grantor"
-						value={formData.grantor}
-						onChange={handleChange}
-						required
-					/>
-					<TextField
-						fullWidth
-						label="Amount"
-						name="grantAmount"
-						type="number"
-						value={formData.grantAmount}
-						onChange={handleChange}
-						required
-					/>
-					<TextField
-						fullWidth
-						label="Allocated"
-						name="allocated"
-						type="number"
-						value={formData.allocated}
-						onChange={handleChange}
-						required
-					/>
-					<TextField
-						fullWidth
-						label="Remaining"
-						name="remaining"
-						type="number"
-						value={formData.grantAmount - formData.allocated}
-						readOnly
-						required
-					/>
-					<TextField
-						fullWidth
-						label="Restrictions"
-						name="restrictions"
-						value={formData.restrictions}
+						label="Filing Type"
+						name="filingType"
+						value={formData.filingType}
 						onChange={handleChange}
 						required
 					/>
@@ -111,6 +70,14 @@ export const GrantForm = (props) => {
 						InputLabelProps={{
 							shrink: true,
 						}}
+						required
+					/>
+					<TextField
+						fullWidth
+						label="Status"
+						name="status"
+						value={formData.status}
+						onChange={handleChange}
 						required
 					/>
 					<TextField
