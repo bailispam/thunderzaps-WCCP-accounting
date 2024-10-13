@@ -19,7 +19,6 @@ import { GrantForm } from "./forms/GrantForm";
 import { BudgetForm } from "./forms/BudgetForm";
 import { DonorForm } from "./forms/DonorForm";
 
-import { pdfDragAndDrop } from "./pdfDragAndDrop";
 
 // separated to be able to import universally, sharin is carin'
 import style from "./style"
