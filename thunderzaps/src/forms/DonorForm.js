@@ -31,7 +31,7 @@ export const DonorForm = (props) => {
 		e.preventDefault();
 		// Handle form submission logic here
 		console.log(formData);
-
+		
 		setForm([]);
 		window.location.reload();
 		
