@@ -3,7 +3,17 @@ from time import timezone
 from django.shortcuts import render
 from .models import Budget, Donor, Funding, Grant, IncomeStatement, IrsFilling
 from django.http import HttpResponse, JsonResponse
-import json
+from django.views.decorators.csrf import csrf_exempt
+
+# function that manages importing of a function -- aid here testingpls!
+def upload_file(request):
+    if request.method == 'PUT' or request.method == 'POST':
+        file = request.FILES['file']  
+        with open(f'media/uploads/{file.name}', 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+        return JsonResponse({'message': 'File uploaded successfully'})
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 # Create your views here.
 def home(request):
@@ -13,12 +23,11 @@ def budget(request):
     if request.method == "GET":
         response = JsonResponse(list(Budget.objects.values()), safe=False)
     elif request.method == "PUT":
-        data = json.loads(request.body)
-        program_name = data.get('programName')
-        budgeted_amount = float(data.get('budgetedAmount', 0))  # Default to 0 if not provided
-        actual_spent = float(data.get('actualSpent', 0))  # Default to 0 if not provided
-        remaining_balance = float(data.get('remainingBalance', 0))  # Default to 0 if not provided
-        notes = data.get('notes', '')
+        program_name = request.PUT.get('programName')
+        budgeted_amount = float(request.PUT.get('budgetedAmount', 0))  # Default to 0 if not provided
+        actual_spent = float(request.PUT.get('actualSpent', 0))  # Default to 0 if not provided
+        remaining_balance = float(request.PUT.get('remainingBalance', 0))  # Default to 0 if not provided
+        notes = request.PUT.get('notes', '')
 
         # Create a new Budget instance
         new_budget = Budget(
@@ -42,18 +51,17 @@ def donor(request):
     if request.method == "GET":
         response = JsonResponse(list(Donor.objects.values()), safe=False)
     elif request.method == "PUT":
-        data = json.loads(request.body)
-        data = json.loads(request.body)
-        donor_name = data.get('donorName')
-        donation_date_str = data.get('donationDate')  # Ensure this is in the correct format
-        total_amount = float(data.get('totalAmount', 0))  # Default to 0 if not provided
-        allocated_amount = float(data.get('allocatedAmount', 0))  # Default to 0 if not provided
-        remaining_balance = float(data.get('remainingBalance', 0))  # Default to 0 if not provided
-        receipt_issued_str = data.get('receiptIssued')  # Ensure this is in the correct format
-        followup_date_str = data.get('followupDate')  # Ensure this is in the correct format
-        form_required = data.get('formRequired') == 'true'  # Convert to boolean
-        acknowledgment_letter_sent = data.get('acknowledgmentLetterSent') == 'true'  # Convert to boolean
-        notes = data.get('notes', '')  # Default to empty string if not provided
+    # Retrieve data from PUT request
+        donor_name = request.PUT.get('donorName')
+        donation_date_str = request.PUT.get('donationDate')  # Ensure this is in the correct format
+        total_amount = float(request.PUT.get('totalAmount', 0))  # Default to 0 if not provided
+        allocated_amount = float(request.PUT.get('allocatedAmount', 0))  # Default to 0 if not provided
+        remaining_balance = float(request.PUT.get('remainingBalance', 0))  # Default to 0 if not provided
+        receipt_issued_str = request.PUT.get('receiptIssued')  # Ensure this is in the correct format
+        followup_date_str = request.PUT.get('followupDate')  # Ensure this is in the correct format
+        form_required = request.PUT.get('formRequired') == 'true'  # Convert to boolean
+        acknowledgment_letter_sent = request.PUT.get('acknowledgmentLetterSent') == 'true'  # Convert to boolean
+        notes = request.PUT.get('notes', '')  # Default to empty string if not provided
         try:
             donation_date = datetime.strptime(donation_date_str, "%Y-%m-%d").date() if donation_date_str else None
         except ValueError:
@@ -92,16 +100,15 @@ def funding(request):
     if request.method == "GET":
         response = JsonResponse(list(Funding.objects.values()), safe=False)
     elif request.method == "PUT":
-        data = json.loads(request.body)
-        source = data.get('source')
-        restricted = data.get('restricted') == 'true'  # Assuming it's coming as a string
-        total_amount = float(data.get('totalAmount', 0))  # Default to 0 if not provided
-        allocated_amount = float(data.get('allocatedAmount', 0))
-        remaining_balance = float(data.get('remainingBalance', 0))
-        restrictions = data.get('restrictions', '')
-        notes = data.get('notes', '')
-        funding_date_str = data.get('fundingDate')  # Get the date as string
-        
+        source = request.PUT.get('source')
+        restricted = request.PUT.get('restricted') == 'true'  # Assuming it's coming as a string
+        total_amount = float(request.PUT.get('totalAmount', 0))  # Default to 0 if not provided
+        allocated_amount = float(request.PUT.get('allocatedAmount', 0))
+        remaining_balance = float(request.PUT.get('remainingBalance', 0))
+        restrictions = request.PUT.get('restrictions', '')
+        notes = request.PUT.get('notes', '')
+        funding_date_str = request.PUT.get('fundingDate')  # Get the date as string
+
         # Convert string to date object
         try:
             funding_date = datetime.strptime(funding_date_str, "%Y-%m-%d").date() if funding_date_str else None
@@ -179,15 +186,19 @@ def incomeStatement(request):
         total_amount = float(data.get('totalAmount', 0))  # Default to 0 if not provided
         
         # Create a new Grant instance
-        new_statement = IncomeStatement(
-            revenueSource=source,
-            restrictedFunds=restricted_amount,
-            unrestrictedFunds=unrestricted_amount,
-            total=total_amount
+        new_grant = IncomeStatement(
+            name=name,
+            grantor=grantor,
+            grantAmount=grant_amount,
+            allocated=allocated,
+            remaining=remaining,
+            restrictions=restrictions,
+            dueDate=due_date,  # Set the due date
+            notes=notes
         )
 
         # Save the new instance to the database
-        new_statement.save()
+        new_grant.save()
         return JsonResponse({"message": "Grant added successfully"}, status=201)  # 201 Created
     else:
         response = HttpResponse("Invalid request method")
@@ -198,12 +209,11 @@ def irsFilling(request):
     if request.method == "GET":
         response = JsonResponse(list(IrsFilling.objects.values()), safe=False)
     if request.method == "PUT":
-        data = json.loads(request.body)
-        filling_type = data.get('fillingType')
-        due_date_str = data.get('dueDate')  # Expecting a string date (e.g., '2024-10-13')
-        status = data.get('status', '')  # Default to empty string if not provided
-        notes = data.get('notes', '')  # Default to empty string if not provided
-
+        filling_type = request.PUT.get('fillingType')
+        due_date_str = request.PUT.get('dueDate')  # Expecting a string date (e.g., '2024-10-13')
+        status = request.PUT.get('status', '')  # Default to empty string if not provided
+        notes = request.PUT.get('notes', '')  # Default to empty string if not provided
+        
         # Convert the due date string to a date object
         try:
             due_date = timezone.datetime.strptime(due_date_str, '%Y-%m-%d').date()

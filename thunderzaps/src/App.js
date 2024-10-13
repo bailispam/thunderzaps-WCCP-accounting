@@ -105,17 +105,19 @@ export const App = () => {
                 sx={{ borderRight: 1, borderColor: "divider", width: '20vw' }}
             >
                 <Box height={50} />
-                <Typography variant="h4" align="center">Colossal</Typography>
+                <Typography variant="h4" align="center" onClick={() => setTab(0)} sx={{ cursor: 'pointer', userSelect: 'none' }}>
+                    Colossal
+                </Typography>
                 <Box height={50} />
                 <Button endIcon={<AddIcon />} onClick={() => setShowModal(x => !x)}> New </Button>
                 <Box height={25} />
-                <Tab label="Dashboard" value={0} {...a11yProps(0)} />
                 <Tab label="Funds" value={1} {...a11yProps(1)} />
                 <Tab label="Grants" value={2} {...a11yProps(2)} />
                 <Tab label="Donors" value={3} {...a11yProps(3)} />
                 <Tab label="Budget" value={4} {...a11yProps(4)} />
                 <Tab label="Income" value={5} {...a11yProps(6)} />
                 <Tab label="Tax Filings" value={6} {...a11yProps(7)} />
+                <Tab label="Dashboard" value={7} {...a11yProps(8)} />
             </Tabs>
             <TabPanel value={tab} index={0}>
                 <Home />
@@ -138,6 +140,10 @@ export const App = () => {
             <TabPanel value={tab} index={6}>
                 <IRSFilings />
             </TabPanel>
+            <TabPanel value={tab} index={7}>
+                <Dashboard />
+            </TabPanel>
+
         </div>
     );
 };
