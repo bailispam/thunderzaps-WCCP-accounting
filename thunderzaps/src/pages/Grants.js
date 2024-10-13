@@ -3,22 +3,32 @@ import React from "react";
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import { DataGrid } from '@mui/x-data-grid';
+import axios from "axios";
 
 export const Grants = () => {
     const [rows, setRows] = React.useState([]);
-
+    
     React.useEffect(() => {
-        fetch('https://laughing-space-train-wvp9x477764f94v-8000.app.github.dev/grant')
-            .then(response => response.json())
-            .then(data => {
-                setRows(data);
-            }
-        );
+        axios({
+            url: "http://129.146.245.100/grant",
+            method: "GET"
+        })
+            .then((res) => {
+                setRows(res.data);
+            })
+            
+            .catch((err) => {});
     }, []);
         
     const columns = [
-    { field: 'col1', headerName: 'Column 1', width: 150 },
-    { field: 'col2', headerName: 'Column 2', width: 150 },
+    { field: 'name', headerName: 'Grant Name', width: 200 },
+    { field: 'grantor', headerName: 'Grantor', width: 150 },
+    { field: 'grantAmount', headerName: 'Grantor', width: 150 },
+    { field: 'allocated', headerName: 'Grantor', width: 150 },
+    { field: 'remaining', headerName: 'Grantor', width: 150 },
+    { field: 'restrictions', headerName: 'Grantor', width: 150 },
+    { field: 'dueDate', headerName: 'Grantor', width: 150 },
+    { field: 'notes', headerName: 'Grantor', width: 350 },
     ];
     return (
         <Box
