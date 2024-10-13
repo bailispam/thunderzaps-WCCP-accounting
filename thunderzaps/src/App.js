@@ -7,7 +7,6 @@ import { Home } from "./pages/Home";
 import { Grants } from "./pages/Grants";
 import { Funds } from "./pages/Funds";
 import { Budgeting } from "./pages/Budgeting";
-import { Balance } from "./pages/Balance";
 import { Donors } from "./pages/Donors";
 import { IncomeStatement } from "./pages/Income";
 import { IRSFilings } from "./pages/IRSFilings";
@@ -78,7 +77,6 @@ export const App = () => {
                             <Button onClick={() => setShowModal(false)}>X</Button>
                         </Box>
                         <Input placeholder="New..." fullWidth onChange={e => setQuery(e.target.value)} />
-                        <Box height='2vh' />
                         <Box flexGrow={1} display='flex' flexDirection='column'overflow='scroll' gap="20px" > 
                             {showForms(query).map((data, i) => <Button key={i} svariant="contained" onClick={() => {setShowModal(false); setForm(data)}}>{data[0]}</Button>)}
                         </Box>
@@ -116,7 +114,6 @@ export const App = () => {
                 <Tab label="Grants" value={2} {...a11yProps(2)} />
                 <Tab label="Donors" value={3} {...a11yProps(3)} />
                 <Tab label="Budget" value={4} {...a11yProps(4)} />
-                <Tab label="Balance" value={5} {...a11yProps(5)} />
                 <Tab label="Income" value={6} {...a11yProps(6)} />
                 <Tab label="Tax Filings" value={7} {...a11yProps(7)} />
             </Tabs>
@@ -134,9 +131,6 @@ export const App = () => {
             </TabPanel>
             <TabPanel value={tab} index={4}>
                 <Budgeting />
-            </TabPanel>
-            <TabPanel value={tab} index={5}>
-                <Balance />
             </TabPanel>
             <TabPanel value={tab} index={6}>
                 <IncomeStatement />

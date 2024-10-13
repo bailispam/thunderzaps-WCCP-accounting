@@ -10,7 +10,7 @@ export const Funds = () => {
     
     React.useEffect(() => {
         axios({
-            url: "http://129.146.245.100/fund",
+            url: "http://129.146.245.100/funding",
             method: "GET"
         })
             .then((res) => {

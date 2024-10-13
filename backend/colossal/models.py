@@ -66,7 +66,7 @@ class IncomeStatement(models.Model):
     def __str__(self):
         return f"{self.revenueSource}" 
     
-class IrsFiling(models.Model):
+class IrsFilling(models.Model):
     filingType = models.CharField(max_length=100)
     dueDate = models.DateField()
     status = models.CharField(max_length=100, default="")

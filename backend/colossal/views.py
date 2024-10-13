@@ -137,7 +137,7 @@ def grant(request):
         notes = request.POST.get('notes', '')
 
         # Create a new Funding instance
-        new_funding = Funding(
+        new_funding = Grant(
             source=source,
             restricted=restricted,  # Set the restricted value
             totalAmount=total_amount,
@@ -175,7 +175,7 @@ def incomeStatement(request):
             return JsonResponse({"error": "Invalid date format. Use MM-DD-YYYY."}, status=400)
 
         # Create a new Grant instance
-        new_grant = Grant(
+        new_grant = IncomeStatement(
             name=name,
             grantor=grantor,
             grantAmount=grant_amount,
