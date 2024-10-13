@@ -10,7 +10,7 @@ export const Funds = () => {
     
     React.useEffect(() => {
         axios({
-            url: "http://129.146.245.100/funds",
+            url: "http://129.146.245.100/fund",
             method: "GET"
         })
             .then((res) => {
@@ -27,7 +27,7 @@ export const Funds = () => {
     { field: 'allocatedAmount', headerName: 'Allocated Amount', width: 150 },
     { field: 'remainingBalance', headerName: 'Remaining Balance', width: 150 },
     { field: 'restrictions', headerName: 'Restrictions', width: 150 },
-    { field: 'notes', headerName: 'Notes', width: 350 },
+    { field: 'notes', headerName: 'Notes', width: 200 },
     ];
     return (
         <Box

@@ -6,9 +6,10 @@ import Tab from "@mui/material/Tab";
 import { Home } from "./pages/Home";
 import { Grants } from "./pages/Grants";
 import { Funds } from "./pages/Funds";
-import { Budgeting } from "./pages/Budeting";
+import { Budgeting } from "./pages/Budgeting";
 import { Balance } from "./pages/Balance";
-import { Income, IncomeStatement } from "./pages/Income";
+import { Donors } from "./pages/Donors";
+import { IncomeStatement } from "./pages/Income";
 import { IRSFilings } from "./pages/IRSFilings";
 
 import { Box, Button, Input, Modal, Paper, Typography } from "@mui/material";
@@ -116,15 +117,14 @@ export const App = () => {
                 <Box height={50} />
                 <Button endIcon={<AddIcon />} onClick={() => setShowModal(x => !x)}> New </Button>
                 <Box height={25} />
-                <Tab label="Item One" value={0} {...a11yProps(0)} />
-                <Tab label="Item Two" value={1} {...a11yProps(1)} />
-                <Tab label="Item Three" value={2} {...a11yProps(2)} />
-                <Tab label="Item Four" value={3} {...a11yProps(3)} />
-                <Tab label="Item Five" value={4} {...a11yProps(4)} />
-                <Tab label="Item Three" value={2} {...a11yProps(5)} />
-                <Tab label="Item Four" value={3} {...a11yProps(6)} />
-                <Tab label="Item Five" value={4} {...a11yProps(7)} />
-                <Tab label="Item Five" value={4} {...a11yProps(8)} />
+                <Tab label="Dashboard" value={0} {...a11yProps(0)} />
+                <Tab label="Funds" value={1} {...a11yProps(1)} />
+                <Tab label="Grants" value={2} {...a11yProps(2)} />
+                <Tab label="Donors" value={3} {...a11yProps(3)} />
+                <Tab label="Budget" value={4} {...a11yProps(4)} />
+                <Tab label="Balance" value={5} {...a11yProps(5)} />
+                <Tab label="Income" value={6} {...a11yProps(6)} />
+                <Tab label="Tax Filings" value={7} {...a11yProps(7)} />
             </Tabs>
             <TabPanel value={tab} index={0}>
                 <Home />
@@ -141,13 +141,13 @@ export const App = () => {
             <TabPanel value={tab} index={4}>
                 <Budgeting />
             </TabPanel>
-            <TabPanel value={tab} index={4}>
+            <TabPanel value={tab} index={5}>
                 <Balance />
             </TabPanel>
-            <TabPanel value={tab} index={4}>
+            <TabPanel value={tab} index={6}>
                 <IncomeStatement />
             </TabPanel>
-            <TabPanel value={tab} index={4}>
+            <TabPanel value={tab} index={7}>
                 <IRSFilings />
             </TabPanel>
         </div>

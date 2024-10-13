@@ -10,7 +10,7 @@ export const Grants = () => {
     
     React.useEffect(() => {
         axios({
-            url: "http://129.146.245.100/grants",
+            url: "http://129.146.245.100/grant",
             method: "GET"
         })
             .then((res) => {
@@ -21,13 +21,13 @@ export const Grants = () => {
     }, []); 
         
     const columns = [
-    { field: 'name', headerName: 'Grant Name', width: 100 },
-    { field: 'grantor', headerName: 'Grantor', width: 100 },
-    { field: 'grantAmount', headerName: 'Amount', width: 100 },
-    { field: 'allocated', headerName: 'Allocated', width: 100 },
-    { field: 'remaining', headerName: 'Remaining', width: 100 },
-    { field: 'restrictions', headerName: 'Restrictions', width: 200 },
-    { field: 'dueDate', headerName: 'Due Date', width: 100 },
+    { field: 'name', headerName: 'Grant Name', width: 200 },
+    { field: 'grantor', headerName: 'Grantor', width: 150 },
+    { field: 'grantAmount', headerName: 'Amount', width: 150 },
+    { field: 'allocated', headerName: 'Allocated', width: 150 },
+    { field: 'remaining', headerName: 'Remaining', width: 150 },
+    { field: 'restrictions', headerName: 'Restrictions', width: 150 },
+    { field: 'dueDate', headerName: 'Due Date', width: 150 },
     { field: 'notes', headerName: 'Notes', width: 200 },
     ];
     return (

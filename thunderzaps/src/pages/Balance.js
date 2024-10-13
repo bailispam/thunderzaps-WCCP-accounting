@@ -25,7 +25,7 @@ export const Balance = () => {
     { field: 'budgetedAmount', headerName: 'Budgeted Amount', width: 150 },
     { field: 'actualSpent', headerName: 'Actual Spent', width: 150 },
     { field: 'remainingBalance', headerName: 'Remaining Balance', width: 150 },
-    { field: 'notes', headerName: 'Notes', width: 350 },
+    { field: 'notes', headerName: 'Notes', width: 200 },
     ];
     return (
         <Box

@@ -10,7 +10,7 @@ export const IRSFilings = () => {
     
     React.useEffect(() => {
         axios({
-            url: "http://129.146.245.100/irsfilings",
+            url: "http://129.146.245.100/irsfilling",
             method: "GET"
         })
             .then((res) => {
@@ -24,7 +24,7 @@ export const IRSFilings = () => {
     { field: 'filingType', headerName: 'Filing Type', width: 200 },
     { field: 'dueDate', headerName: 'Due Date', width: 150 },
     { field: 'status', headerName: 'Status', width: 150 },
-    { field: 'notes', headerName: 'TNotes', width: 350 },
+    { field: 'notes', headerName: 'TNotes', width: 200 },
     ];
     return (
         <Box

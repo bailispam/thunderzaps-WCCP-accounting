@@ -10,7 +10,7 @@ export const Donors = () => {
     
     React.useEffect(() => {
         axios({
-            url: "http://129.146.245.100/donors",
+            url: "http://129.146.245.100/donor",
             method: "GET"
         })
             .then((res) => {
@@ -30,7 +30,7 @@ export const Donors = () => {
     { field: 'followupDate', headerName: 'Follow-up Date', width: 150 },
     { field: 'formRequired', headerName: 'Form Required?', width: 150 },
     { field: 'acknowledgmentLetterSent', headerName: 'Acknowledgment Letter Sent', width: 150 },
-    { field: 'notes', headerName: 'Notes', width: 350 },
+    { field: 'notes', headerName: 'Notes', width: 200 },
     ];
     return (
         <Box

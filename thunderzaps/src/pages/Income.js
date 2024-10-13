@@ -10,7 +10,7 @@ export const IncomeStatement = () => {
     
     React.useEffect(() => {
         axios({
-            url: "http://129.146.245.100/income",
+            url: "http://129.146.245.100/incomestatement",
             method: "GET"
         })
             .then((res) => {
@@ -24,7 +24,7 @@ export const IncomeStatement = () => {
     { field: 'revenueSource', headerName: 'Revenue Source', width: 200 },
     { field: 'unrestrictedFunds', headerName: 'Unrestricted Funds', width: 150 },
     { field: 'restrictedFunds', headerName: 'Restricted Funds', width: 150 },
-    { field: 'total', headerName: 'Total', width: 350 },
+    { field: 'total', headerName: 'Total', width: 200 },
     ];
     return (
         <Box
