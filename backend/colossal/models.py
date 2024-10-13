@@ -8,7 +8,7 @@ class Funding(models.Model):
     remainingBalance = models.FloatField()
     restrictions = models.CharField(max_length=500, default="")
     notes = models.CharField(max_length=500, default="")
-        
+    created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"{self.source}-{self.notes[:50]}" 
 
@@ -21,7 +21,7 @@ class Grant(models.Model):
     restrictions = models.CharField(max_length=100, default="")
     dueDate = models.DateField()
     notes = models.CharField(max_length=500, default="")
-        
+    created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"{self.name}-{self.notes[:50]}" 
     
@@ -41,7 +41,7 @@ class Donor(models.Model):
     acknowledgmentLetterSent = models.BooleanField()
     
     notes = models.CharField(max_length=500, default="") 
-        
+    created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"{self.donorName}-{self.notes[:50]}" 
     
@@ -52,7 +52,7 @@ class Budget(models.Model):
     actualSpent = models.FloatField()
     remainingBalance = models.FloatField()
     notes = models.CharField(max_length=500, default="")
-        
+    created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"{self.programName}-{self.notes[:50]}" 
 
@@ -62,7 +62,7 @@ class IncomeStatement(models.Model):
     unrestrictedFunds = models.FloatField()
     restrictedFunds = models.FloatField()
     total = models.FloatField()
-        
+    created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"{self.revenueSource}" 
     
@@ -71,6 +71,6 @@ class IrsFilling(models.Model):
     dueDate = models.DateField()
     status = models.CharField(max_length=100, default="")
     notes = models.CharField(max_length=100, default="")
-        
+    created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"{self.fillingType}-{self.notes[:50]}" 
