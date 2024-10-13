@@ -19,6 +19,10 @@ import { GrantForm } from "./forms/GrantForm";
 import { BudgetForm } from "./forms/BudgetForm";
 import { DonorForm } from "./forms/DonorForm";
 
+
+// separated to be able to import universally, sharin is carin'
+import style from "./style"
+
 function a11yProps(index) {
     return {
         id: `vertical-tab-${index}`,
@@ -43,16 +47,6 @@ function TabPanel(props) {
         </div>
     );
 }
-
-const style = {
-    main: {
-        width: "100vw",
-        height: "100vh",
-        margin: 0,
-        display: "flex",
-        flexDirection: "row",
-    },
-};
 
 export const App = () => {
     const [tab, setTab] = useState(0);
