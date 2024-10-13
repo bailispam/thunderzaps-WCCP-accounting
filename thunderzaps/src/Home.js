@@ -8,6 +8,7 @@ const style = {
     },
 };
 
+// here goes content!! :-)
 export const Home = () => {
     return (
         <div style={style.home}>
