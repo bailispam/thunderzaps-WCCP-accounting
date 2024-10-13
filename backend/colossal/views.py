@@ -3,6 +3,9 @@ from .models import Budget, Donor, Funding, Grant, IncomeStatement, IrsFilling
 from django.http import HttpResponse, JsonResponse
 
 # Create your views here.
+def home(request):
+	return HttpResponse("Welcome to the Colossal API")
+
 def budget(request):
 	if request.method == "GET":
 		response = JsonResponse(list(Budget.objects.values()), safe=False)
