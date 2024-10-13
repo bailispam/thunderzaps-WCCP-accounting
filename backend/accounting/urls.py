@@ -21,6 +21,7 @@ from django.urls import path
 from colossal import views
 
 urlpatterns = [
+    path("", views.home),
     path("admin/", admin.site.urls),
     path("grant/", views.grant),
     path("budget/", views.budget),
