@@ -19,3 +19,5 @@ class FundAccounting:
 
     def total_dict(self):
         self.sum_total("")
+
+    
