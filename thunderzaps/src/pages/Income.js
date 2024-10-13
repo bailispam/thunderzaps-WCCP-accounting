@@ -40,7 +40,7 @@ export const IncomeStatement = () => {
             }}
         >
             <Box style={{ height: 100, width: '100%' }}>
-                <Typography variant="h2">IncomeStatement</Typography>
+                <Typography variant="h2">Income Statement</Typography>
             </Box>
             <Box style={{ height: '100%', width: '100%' }}>
                 <DataGrid columns={columns} rows={rows} /> 

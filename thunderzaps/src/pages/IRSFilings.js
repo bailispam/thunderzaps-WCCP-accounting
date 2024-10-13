@@ -40,7 +40,7 @@ export const IRSFilings = () => {
             }}
         >
             <Box style={{ height: 100, width: '100%' }}>
-                <Typography variant="h2">IRSFilings</Typography>
+                <Typography variant="h2">IRS Filings</Typography>
             </Box>
             <Box style={{ height: '100%', width: '100%' }}>
                 <DataGrid columns={columns} rows={rows} /> 
