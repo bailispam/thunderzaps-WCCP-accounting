@@ -23,12 +23,12 @@ export const Grants = () => {
     const columns = [
     { field: 'name', headerName: 'Grant Name', width: 200 },
     { field: 'grantor', headerName: 'Grantor', width: 150 },
-    { field: 'grantAmount', headerName: 'Grantor', width: 150 },
-    { field: 'allocated', headerName: 'Grantor', width: 150 },
-    { field: 'remaining', headerName: 'Grantor', width: 150 },
-    { field: 'restrictions', headerName: 'Grantor', width: 150 },
-    { field: 'dueDate', headerName: 'Grantor', width: 100 },
-    { field: 'notes', headerName: 'Grantor', width: 250 },
+    { field: 'grantAmount', headerName: 'Grant Amount', width: 150 },
+    { field: 'allocated', headerName: 'Allocated', width: 150 },
+    { field: 'remaining', headerName: 'Remaining', width: 150 },
+    { field: 'restrictions', headerName: 'Restrictions', width: 150 },
+    { field: 'dueDate', headerName: 'Compliance Due Date', width: 100 },
+    { field: 'notes', headerName: 'Notes', width: 250 },
     ];
     return (
         <Box
