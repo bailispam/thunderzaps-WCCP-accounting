@@ -29,7 +29,7 @@ export const GrantForm = () => {
 		console.log(formData);
 	
 		axios({
-			url: "http://129.146.245.100/grant",
+			url: "http://129.146.245.100/grant/",
 			method: "POST",
 			data: formData,
 		}).catch((err) => {});
