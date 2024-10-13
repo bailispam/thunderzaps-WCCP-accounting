@@ -5,8 +5,10 @@ import Tab from "@mui/material/Tab";
 
 import { Home } from "./pages/Home";
 import { Grants } from "./pages/Grants";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Input, Modal, Paper, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
+
+import { GrantForm } from "./forms/GrantForm";
 
 function a11yProps(index) {
     return {
@@ -17,7 +19,7 @@ function a11yProps(index) {
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
+    
     return (
         <div
             role="tabpanel"
@@ -45,13 +47,43 @@ const style = {
 
 export const App = () => {
     const [tab, setTab] = useState(0);
-
+    const [showModal, setShowModal] = useState(false);
+    const [query, setQuery] = useState("");
+    
     const handleChange = (event, newValue) => {
         setTab(newValue);
     };
+    
+    const forms = [ 
+        ["Grant", <GrantForm />],
+        ["Donanation", <GrantForm />],
+        ["Tax Filing", <GrantForm />],
+        ["Invoice", <GrantForm />],
+        ["Expense", <GrantForm />],
+    ]
+
+    const showForms = (query) => {
+        return forms.filter(([name, _]) => name.toLowerCase().includes(query.toLowerCase())).map(([text, component]) => [text, component]);
+    }
 
     return (
         <div style={style.main}>
+            {
+            <Modal open={showModal}>
+                <Box width='100vw' height='100vh' display='flex' justifyContent='center' alignItems='center'>
+                    <Paper sx={{padding: '2em', height: '30vh', width: '50vw', gap: '2em', display: 'flex', flexDirection: 'column'}}>
+                        <Box display='flex' justifyContent='flex-end'>
+                            <Button onClick={() => setShowModal(false)}>X</Button>
+                        </Box>
+                        <Input height='3vh' placeholder="New..." fullWidth onChange={e => setQuery(e.target.value)} />
+                        <Box flexGrow={1} />
+                        <Box height='22vh' display='flex' flexDirection='column'overflow='scroll' gap="20px" > 
+                            {showForms(query).map((data, i) => <Button key={i} svariant="contained" onClick={() => setShowModal(false)}>{data[0]}</Button>)}
+                        </Box>
+                    </Paper>
+                </Box> 
+            </Modal>
+            }
             <Tabs
                 orientation="vertical"
                 value={tab}
@@ -63,7 +95,7 @@ export const App = () => {
                 <Box height={50} />
                 <Typography variant="h4" align="center">ThunderZaps</Typography>
                 <Box height={50} />
-                <Button endIcon={<AddIcon />}> New </Button>
+                <Button endIcon={<AddIcon />} onClick={() => setShowModal(x => !x)}> New </Button>
                 <Box height={25} />
                 <Tab label="Item One" value={0} {...a11yProps(0)} />
                 <Tab label="Item Two" value={1} {...a11yProps(1)} />

@@ -27,8 +27,8 @@ export const Grants = () => {
     { field: 'allocated', headerName: 'Grantor', width: 150 },
     { field: 'remaining', headerName: 'Grantor', width: 150 },
     { field: 'restrictions', headerName: 'Grantor', width: 150 },
-    { field: 'dueDate', headerName: 'Grantor', width: 150 },
-    { field: 'notes', headerName: 'Grantor', width: 350 },
+    { field: 'dueDate', headerName: 'Grantor', width: 100 },
+    { field: 'notes', headerName: 'Grantor', width: 250 },
     ];
     return (
         <Box
