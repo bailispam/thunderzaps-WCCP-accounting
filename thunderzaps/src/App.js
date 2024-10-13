@@ -10,6 +10,7 @@ import { Budgeting } from "./pages/Budgeting";
 import { Donors } from "./pages/Donors";
 import { IncomeStatement } from "./pages/Income";
 import { IRSFilings } from "./pages/IRSFilings";
+import { Dashboard } from "./pages/Dashboard";
 
 import { Box, Button, Input, Modal, Paper, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
@@ -111,14 +112,17 @@ export const App = () => {
                 <Box height={50} />
                 <Button endIcon={<AddIcon />} onClick={() => setShowModal(x => !x)}> New </Button>
                 <Box height={25} />
+                <Tab label="Dashboard" value={7} {...a11yProps(7)} />
                 <Tab label="Funds" value={1} {...a11yProps(1)} />
                 <Tab label="Grants" value={2} {...a11yProps(2)} />
                 <Tab label="Donors" value={3} {...a11yProps(3)} />
                 <Tab label="Budget" value={4} {...a11yProps(4)} />
-                <Tab label="Income" value={5} {...a11yProps(6)} />
-                <Tab label="Tax Filings" value={6} {...a11yProps(7)} />
-                <Tab label="Dashboard" value={7} {...a11yProps(8)} />
+                <Tab label="Income" value={5} {...a11yProps(5)} />
+                <Tab label="Tax Filings" value={6} {...a11yProps(6)} />
             </Tabs>
+            <TabPanel value={tab} index={7}>
+                <Dashboard />
+            </TabPanel>
             <TabPanel value={tab} index={0}>
                 <Home />
             </TabPanel>
@@ -139,9 +143,6 @@ export const App = () => {
             </TabPanel>
             <TabPanel value={tab} index={6}>
                 <IRSFilings />
-            </TabPanel>
-            <TabPanel value={tab} index={7}>
-                <Dashboard />
             </TabPanel>
 
         </div>
