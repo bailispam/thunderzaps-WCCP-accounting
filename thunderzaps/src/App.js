@@ -5,13 +5,9 @@ import Tab from "@mui/material/Tab";
 
 import { Home } from "./pages/Home";
 import { Grants } from "./pages/Grants";
-<<<<<<< Updated upstream
-import { Box, Button, Input, Modal, Paper, Typography } from "@mui/material";
-=======
 import { Funds } from "./pages/Funds";
 import { Donors } from "./pages/Donors";
-import { Box, Button, Typography } from "@mui/material";
->>>>>>> Stashed changes
+import { Box, Button, Input, Modal, Paper, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 
 import { GrantForm } from "./forms/GrantForm";
