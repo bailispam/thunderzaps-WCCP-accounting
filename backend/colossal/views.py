@@ -4,10 +4,20 @@ from django.shortcuts import render
 from .models import Budget, Donor, Funding, Grant, IncomeStatement, IrsFilling
 from django.http import HttpResponse, JsonResponse
 import json
+from django.views.decorators.csrf import csrf_exempt
 
+# function that manages importing of a function -- aid here testingpls!
+def upload_file(request):
+    if request.method == 'PUT' or request.method == 'POST':
+        file = request.FILES['file']  
+        with open(f'media/uploads/{file.name}', 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+        return JsonResponse({'message': 'File uploaded successfully'})
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
 # Create your views here.
 def home(request):
-    return HttpResponse("Welcome to the Colossal API")
+return HttpResponse("Welcome to the Colossal API")
 
 def budget(request):
     if request.method == "GET":
