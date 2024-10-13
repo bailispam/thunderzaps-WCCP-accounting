@@ -5,12 +5,12 @@ import Typography from "@mui/material/Typography"
 import { DataGrid } from '@mui/x-data-grid';
 import axios from "axios";
 
-export const Grants = () => {
+export const Budgeting = () => {
     const [rows, setRows] = React.useState([]);
     
     React.useEffect(() => {
         axios({
-            url: "http://129.146.245.100/grants",
+            url: "http://129.146.245.100/budget",
             method: "GET"
         })
             .then((res) => {
@@ -21,14 +21,11 @@ export const Grants = () => {
     }, []);
         
     const columns = [
-    { field: 'name', headerName: 'Grant Name', width: 200 },
-    { field: 'grantor', headerName: 'Grantor', width: 150 },
-    { field: 'grantAmount', headerName: 'Grantor', width: 150 },
-    { field: 'allocated', headerName: 'Grantor', width: 150 },
-    { field: 'remaining', headerName: 'Grantor', width: 150 },
-    { field: 'restrictions', headerName: 'Grantor', width: 150 },
-    { field: 'dueDate', headerName: 'Grantor', width: 100 },
-    { field: 'notes', headerName: 'Grantor', width: 250 },
+    { field: 'programName', headerName: 'Program Name', width: 200 },
+    { field: 'budgetedAmount', headerName: 'Budgeted Amount', width: 150 },
+    { field: 'actualSpent', headerName: 'Actual Spent', width: 150 },
+    { field: 'remainingBalance', headerName: 'Remaining Balance', width: 150 },
+    { field: 'notes', headerName: 'Notes', width: 350 },
     ];
     return (
         <Box
@@ -44,7 +41,7 @@ export const Grants = () => {
             }}
         >
             <Box style={{ height: 100, width: '100%' }}>
-                <Typography variant="h2">Grants</Typography>
+                <Typography variant="h2">Budgeting</Typography>
             </Box>
             <Box style={{ height: '100%', width: '100%' }}>
                 <DataGrid columns={columns} rows={rows} /> 

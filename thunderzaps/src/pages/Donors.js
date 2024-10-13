@@ -5,12 +5,12 @@ import Typography from "@mui/material/Typography"
 import { DataGrid } from '@mui/x-data-grid';
 import axios from "axios";
 
-export const Grants = () => {
+export const Donors = () => {
     const [rows, setRows] = React.useState([]);
     
     React.useEffect(() => {
         axios({
-            url: "http://129.146.245.100/grants",
+            url: "http://129.146.245.100/donors",
             method: "GET"
         })
             .then((res) => {
@@ -21,14 +21,16 @@ export const Grants = () => {
     }, []);
         
     const columns = [
-    { field: 'name', headerName: 'Grant Name', width: 200 },
-    { field: 'grantor', headerName: 'Grantor', width: 150 },
-    { field: 'grantAmount', headerName: 'Grantor', width: 150 },
-    { field: 'allocated', headerName: 'Grantor', width: 150 },
-    { field: 'remaining', headerName: 'Grantor', width: 150 },
-    { field: 'restrictions', headerName: 'Grantor', width: 150 },
-    { field: 'dueDate', headerName: 'Grantor', width: 100 },
-    { field: 'notes', headerName: 'Grantor', width: 250 },
+    { field: 'donorName', headerName: 'Donor Name', width: 200 },
+    { field: 'donationDate', headerName: 'Donation Date', width: 150 },
+    { field: 'totalAmount', headerName: 'Amount', width: 150 },
+    { field: 'allocatedAmount', headerName: 'Allocated Amount', width: 150 },
+    { field: 'remainingBalance', headerName: 'Remaining Balance', width: 150 },
+    { field: 'receiptIssued', headerName: 'Receipt Issued?', width: 150 },
+    { field: 'followupDate', headerName: 'Follow-up Date', width: 150 },
+    { field: 'formRequired', headerName: 'Form Required?', width: 150 },
+    { field: 'acknowledgmentLetterSent', headerName: 'Acknowledgment Letter Sent', width: 150 },
+    { field: 'notes', headerName: 'Notes', width: 350 },
     ];
     return (
         <Box
@@ -44,7 +46,7 @@ export const Grants = () => {
             }}
         >
             <Box style={{ height: 100, width: '100%' }}>
-                <Typography variant="h2">Grants</Typography>
+                <Typography variant="h2">Donors</Typography>
             </Box>
             <Box style={{ height: '100%', width: '100%' }}>
                 <DataGrid columns={columns} rows={rows} /> 

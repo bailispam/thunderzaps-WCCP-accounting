@@ -5,7 +5,13 @@ import Tab from "@mui/material/Tab";
 
 import { Home } from "./pages/Home";
 import { Grants } from "./pages/Grants";
+<<<<<<< Updated upstream
 import { Box, Button, Input, Modal, Paper, Typography } from "@mui/material";
+=======
+import { Funds } from "./pages/Funds";
+import { Donors } from "./pages/Donors";
+import { Box, Button, Typography } from "@mui/material";
+>>>>>>> Stashed changes
 import AddIcon from '@mui/icons-material/Add';
 
 import { GrantForm } from "./forms/GrantForm";
@@ -107,13 +113,13 @@ export const App = () => {
                 <Home />
             </TabPanel>
             <TabPanel value={tab} index={1}>
-                <Grants />
+                <Funds />
             </TabPanel>
             <TabPanel value={tab} index={2}>
-                Item Three
+                <Grants />
             </TabPanel>
             <TabPanel value={tab} index={3}>
-                Item Four
+                <Donors />
             </TabPanel>
             <TabPanel value={tab} index={4}>
                 Item Five
